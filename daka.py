@@ -12,8 +12,6 @@ import time
 # browser = webdriver.Chrome(chrome_options=browserOptions)
 
 # 自动打卡
-
-
 class AutoDaka:
     # 初始化
     def __init__(self, url, username, password, latitude, longitude):
@@ -95,7 +93,6 @@ class AutoDaka:
 
         time.sleep(1)
 
-
         try:  # 提交位置信息
             area_element = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable(
@@ -150,11 +147,14 @@ class AutoDaka:
         driver.find_element(by=By.XPATH,
                             value="/html/body/div[1]/div[1]/div/section/div[5]/div/a").click()
 
-        time.sleep(5)
+        time.sleep(2)
+        
+        # 弹出的确认提交窗口，点击确定
         tijiao = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="wapcf"]/div/div[2]/div[1]')))
         tijiao.click()
-        time.sleep(5)
+
+        time.sleep(2)
         
 
     def run(self):
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     """
     用户输入区：
     学号
-    密码）
+    密码
     定位地点的经纬度
     """
     url = "https://healthreport.zju.edu.cn/ncov/wap/default/index"
