@@ -56,8 +56,8 @@ class AutoDaka:
         print("登录到浙大统一身份认证平台...")
 
         try:
-            username_input.send_keys(username)
-            password_input.send_keys(password)
+            username_input.send_keys(self.username)
+            password_input.send_keys(self.password)
             print("已登录到浙大统一身份认证平台")
             login_button.click()
             time.sleep(1)
