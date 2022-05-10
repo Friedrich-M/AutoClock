@@ -165,7 +165,7 @@ class AutoDaka:
             tijiao.click()
             print("确认提交")
         except Exception as error:
-            print('未正确提交，请手动打卡.\n', error)
+            print('您已经提交过一次了.\n', error)
 
         time.sleep(1)
         
