@@ -98,6 +98,7 @@ class AutoDaka:
         driver.find_element(by=By.XPATH, 
                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]").click()
 
+        # 下面的这些已经是填好的状态，不必再填写了
 #         # 所在校区
 #         driver.find_element(by=By.XPATH, 
 #                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[5]/div/div/div[1]/span[1]").click()
@@ -138,8 +139,9 @@ class AutoDaka:
         driver.find_element(by=By.XPATH,
                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[27]/div/div/div/span[1]").click()
 
-        # driver.find_element(by=By.XPATH, 
-        #         value="/html/body/div[1]/div[1]/div/section/div[5]/div/a").click()
+        # 确认提交
+        driver.find_element(by=By.XPATH, 
+                value="/html/body/div[1]/div[1]/div/section/div[5]/div/a").click()
 
     def run(self):
         driver = self.init_driver()
