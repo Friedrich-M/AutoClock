@@ -1,7 +1,6 @@
 import requests
 from hashlib import md5
 
-
 class Chaojiying_Client(object):
 
     def __init__(self, username, password, soft_id):
@@ -58,11 +57,3 @@ class Chaojiying_Client(object):
         r = requests.post(
             'http://upload.chaojiying.net/Upload/ReportError.php', data=params, headers=self.headers)
         return r.json()
-
-
-if __name__ == '__main__':
-    # 用户中心>>软件ID 生成一个替换 96001
-    chaojiying = Chaojiying_Client(
-        'kalival', 'mlz123123', '928325')  
-    im = open('a.jpg', 'rb').read()  
-    print(chaojiying.PostPic(im, 1902))
