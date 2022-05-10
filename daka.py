@@ -26,16 +26,18 @@ class AutoDaka:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--disable-infobars")
 
-        # 使用headless无界面浏览器模式，因为要放在linux服务器上运行，无法显示界面，调试的时候需要把下面五行注释掉，显示chrome界面
+        # 使用headless无界面浏览器模式，因为要放在linux服务器上运行，无法显示界面，调试的时候需要把下面五行注释掉，显示chrome界面（就是有点慢）
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('window-size=1920x1080')
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--hide-scrollbars')
         chrome_options.add_argument('--headless')
 
-        # 使用 chrome
-        driver = webdriver.Chrome(options=chrome_options)  # 创建chrome驱动
+        # 创建chrome驱动
+        driver = webdriver.Chrome(options=chrome_options) 
+        # 访问url 
         driver.get(url)
+        # 将窗口最大化
         driver.maximize_window()
 
         return driver
@@ -45,6 +47,7 @@ class AutoDaka:
               datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         print("🚌 打卡任务启动")
 
+        # 找到输入框,发送要输入的用户名和密码,模拟登陆
         username_input = driver.find_element(by=By.ID, value="username")
         password_input = driver.find_element(by=By.ID, value="password")
         login_button = driver.find_element(by=By.ID, value="dl")
@@ -87,6 +90,7 @@ class AutoDaka:
 
         print("基本信息填写中...")
 
+        # 是否在校
         school = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")))
         school.click()
@@ -102,6 +106,10 @@ class AutoDaka:
             print("地理位置信息已提交")
         except Exception as error:
             print('get location wrong...\n', error)
+
+        time.sleep(1)
+        
+        # 下面的内容缓存里已经填写过了，不用再填写
 
         # 所在校区
         # driver.find_element(by=By.XPATH,
@@ -129,6 +137,7 @@ class AutoDaka:
                                   value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/span/img").screenshot_as_png
 
         print("正在识别验证码")
+        # 输入chaojiying的用户名，密码和软件ID
         chaojiying = Chaojiying_Client('kalival', 'mlz123123', '928325')
         dic = chaojiying.PostPic(img, 1902)
         verify_code = dic['pic_str']
@@ -150,11 +159,15 @@ class AutoDaka:
         time.sleep(2)
         
         # 弹出的确认提交窗口，点击确定
-        tijiao = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="wapcf"]/div/div[2]/div[1]')))
-        tijiao.click()
+        try:  
+            tijiao = WebDriverWait(driver, 10).until(
+                            EC.element_to_be_clickable((By.XPATH, '//*[@id="wapcf"]/div/div[2]/div[1]')))
+            tijiao.click()
+            print("确认提交")
+        except Exception as error:
+            print('未正确提交，请手动打卡.\n', error)
 
-        time.sleep(2)
+        time.sleep(1)
         
 
     def run(self):
