@@ -42,13 +42,13 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
 
 3. 配置定时运行时间（可选）
 
-   在 .github/workflows/health-report.yml 中更改时间：
+   在 .github/workflows/main.yml 中更改时间：
 
    ```yml
    on:
    workflow_dispatch:
    schedule:
-      - cron: '0 23 * * *'
+      - cron: '0 */12 * * *'
    ```
  - 注意，github是UTC时间，北京时间是UTC时间加8小时
  
