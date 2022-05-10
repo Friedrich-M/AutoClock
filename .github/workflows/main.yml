@@ -8,7 +8,7 @@ on:
   watch:
     types: [ started ]
   schedule:
-    - cron: 45 */10 * * * # Runs every 45th minute past the 0, 10 and 20th hour. Actions schedules run at most every 5 minutes.
+    - cron: 45 */12 * * * # Runs every 45th minute past the 0, 10 and 20th hour. Actions schedules run at most every 5 minutes.
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
