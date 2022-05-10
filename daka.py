@@ -98,25 +98,25 @@ class AutoDaka:
         driver.find_element(by=By.XPATH, 
                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]").click()
 
-        # 所在校区
-        driver.find_element(by=By.XPATH, 
-                value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[5]/div/div/div[1]/span[1]").click()
+#         # 所在校区
+#         driver.find_element(by=By.XPATH, 
+#                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[5]/div/div/div[1]/span[1]").click()
 
-        # 今日申领健康码的状态？
-        driver.find_element(by=By.XPATH, 
-                value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[21]/div/div/div[1]/span[1]").click()
+#         # 今日申领健康码的状态？
+#         driver.find_element(by=By.XPATH, 
+#                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[21]/div/div/div[1]/span[1]").click()
 
-        # 今日是否有发热症状（高于37.2 ℃）？
-        driver.find_element(by=By.XPATH, 
-                value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[22]/div/div/div[2]/span[1]").click()
+#         # 今日是否有发热症状（高于37.2 ℃）？
+#         driver.find_element(by=By.XPATH, 
+#                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[22]/div/div/div[2]/span[1]").click()
 
-        # 今日是否有涉及涉疫情的管控措施
-        driver.find_element(by=By.XPATH, 
-                value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[22]/div/div/div[2]/span[1]").click()
+#         # 今日是否有涉及涉疫情的管控措施
+#         driver.find_element(by=By.XPATH, 
+#                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[22]/div/div/div[2]/span[1]").click()
 
-        # 是否有与新冠疫情确诊人员或密接人员有接触的情况? 
-        driver.find_element(by=By.XPATH, 
-                value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[25]/div/div/div[2]/span[1]").click()
+#         # 是否有与新冠疫情确诊人员或密接人员有接触的情况? 
+#         driver.find_element(by=By.XPATH, 
+#                 value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[25]/div/div/div[2]/span[1]").click()
 
         # 获取验证码
         print("正在获取验证码...")
