@@ -8,8 +8,7 @@ on:
   watch:
     types: [ started ]
   schedule:
-    - cron: 45 */10 * * *
-
+    - cron: 45 */10 * * * # Runs every 45th minute past the 0, 10 and 20th hour. Actions schedules run at most every 5 minutes.
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -29,11 +28,18 @@ jobs:
         uses: actions/setup-python@v1
         with:
            python-version: 3.9
+           
       - name: 'Install requirements'
         run: pip install -r ./requirements.txt
+
       - name: 'Working'
+        env: 
+          account: ${{ secrets.account }}
+          password: ${{ secrets.password }}
+          DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
+          DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+
         run: |
           sudo cp -p ./chrome/chromedriver /usr/bin/
           chmod -R 777 /usr/bin/chromedriver
           python daka.py
-         
