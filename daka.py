@@ -168,14 +168,16 @@ class AutoDaka:
                             EC.element_to_be_clickable((By.XPATH, '//*[@id="wapcf"]/div/div[2]/div[1]')))
             tijiao.click()
             print("确认提交")
+            self.Reminder("今天的打卡完成了🚌，耶！")
         except Exception as error:
             print('您已经提交过一次了.\n', error)
+            self.Reminder("您今天已经提交过一次了")
 
         time.sleep(1)
     
-    def Reminder(self):
+    def Reminder(self, content):
         if self.DD_BOT_TOKEN:
-            ding= dingpush('浙江大学每日健康打卡', "今天的打卡完成了🚌，耶！", self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
+            ding= dingpush('浙江大学每日健康打卡', content, self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
             ding.SelectAndPush()
         else:
             print("钉钉推送未配置，请自行查看签到结果")
@@ -188,7 +190,7 @@ class AutoDaka:
         self.daka(driver)
         driver.close()
         print("打卡完成")
-        self.Reminder()
+        
 
 
 if __name__ == "__main__":
