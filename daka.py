@@ -187,9 +187,9 @@ if __name__ == "__main__":
     定位地点的经纬度
     """
     url = "https://healthreport.zju.edu.cn/ncov/wap/default/index"
-    username = "3200103580"  # 用户名（学号）
-    password = "mlz123123"  # 密码
+    account = os.getenv("account")
+    password = os.getenv("password")
     latitude = 30.27  # 虚拟位置纬度
     longitude = 120.13  # 经度
-    daka = AutoDaka(url, username, password, latitude, longitude)
+    daka = AutoDaka(url, account, password, latitude, longitude)
     daka.run()
