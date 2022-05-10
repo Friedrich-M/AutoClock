@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import datetime
 import time
 import os
+from DingRobot import dingpush
 
 # 使用代理的方法 ，可以直接windows使用代理，不用这么麻烦
 # browserOptions = webdriver.ChromeOptions()
@@ -18,9 +19,11 @@ class AutoDaka:
     def __init__(self, url, username, password, latitude, longitude):
         self.url = url
         self.username = username  # 用户名(学号)
-        self.password = password  # 密码
-        self.latitude = latitude  # 纬度
+        self.password = password  # 密码 
+        self.latitude = latitude  # 纬度 默认是杭州市西湖区，可以在main函数里进行修改
         self.longitude = longitude  # 经度
+        self.DD_BOT_TOKEN = os.getenv("DD_BOT_TOKEN")
+        self.DD_BOT_SECRET=os.getenv("DD_BOT_SECRET")
 
     # 获得Chrome驱动，并访问url
     def init_driver(self):
@@ -169,6 +172,13 @@ class AutoDaka:
             print('您已经提交过一次了.\n', error)
 
         time.sleep(1)
+     
+        if self.DD_BOT_TOKEN:
+            ding= dingpush('浙江大学每日健康打卡', "完成",self.reminders,self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
+            ding.SelectAndPush()
+        else:
+            print("钉钉推送未配置，请自行查看签到结果")
+        print("推送完成！")
         
 
     def run(self):
