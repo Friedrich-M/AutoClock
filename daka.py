@@ -175,7 +175,7 @@ class AutoDaka:
     
     def Reminder(self):
         if self.DD_BOT_TOKEN:
-            ding= dingpush('浙江大学每日健康打卡', "今天的打卡完成了，耶:laughing:！", self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
+            ding= dingpush('浙江大学每日健康打卡', "今天的打卡完成了🚌，耶！", self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
             ding.SelectAndPush()
         else:
             print("钉钉推送未配置，请自行查看签到结果")
