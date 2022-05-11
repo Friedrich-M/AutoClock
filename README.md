@@ -57,6 +57,8 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
      - 手机版钉钉 > 右上角添加 > 面对面建群 > 创建之后得到只有你一个人的群聊
      - 电脑版钉钉 > 群设置 > 智能群助手 > 添加机器人 > 自定义，名字随便填
      
+     ！！！注意： 机器人类型是自定义，不是github，敲黑板！
+     
    - 获取上述的token和secret
    
     <img width="400" alt="image" src="https://user-images.githubusercontent.com/85838942/167732273-3a9159fd-ab3e-4169-990a-4f0a2348d9d8.png">
