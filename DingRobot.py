@@ -36,7 +36,7 @@ class dingpush():
         try:
             r = requests.post(url=url, data=json.dumps(data), headers=headers, timeout=15).json()
             if not r['errcode']:
-                print('INFO: 钉钉推送似乎成功了！')
+                print('INFO: 钉钉推送成功！')
             else:
                 print("INFO: 钉钉推送失败！","错误详情："+ r["errmsg"])
         except Exception as e:
@@ -55,7 +55,7 @@ class dingpush():
         try:
             r = requests.post(url,data=json.dumps(data),headers=headers).json()
             if not r['errcode']:
-                print("INFO: 钉钉推送似乎成功了")
+                print("INFO: 钉钉推送成功")
                 
             else:
                 print("INFO: 钉钉推送失败！","错误详情："+ r["errmsg"])
