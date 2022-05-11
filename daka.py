@@ -22,15 +22,15 @@ class AutoDaka:
         self.password = password  # 密码 
         self.latitude = latitude  # 纬度 默认是杭州市西湖区，可以在main函数里进行修改
         self.longitude = longitude  # 经度
-        self.DD_BOT_TOKEN = os.getenv("DD_BOT_TOKEN")
-        self.DD_BOT_SECRET=os.getenv("DD_BOT_SECRET")
+        self.DD_BOT_TOKEN = os.getenv("DD_BOT_TOKEN") # 钉钉机器人token
+        self.DD_BOT_SECRET=os.getenv("DD_BOT_SECRET") # 钉钉机器人secret
 
     # 获得Chrome驱动，并访问url
     def init_driver(self):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--disable-infobars")
 
-        # 使用headless无界面浏览器模式，因为要放在linux服务器上运行，无法显示界面，调试的时候需要把下面五行注释掉，显示chrome界面（就是有点慢）
+        # 使用headless无界面浏览器模式，因为要放在linux服务器上运行，无法显示界面，调试的时候需要把下面五行注释掉，显示chrome界面
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('window-size=1920x1080')
         chrome_options.add_argument('--disable-gpu')
@@ -70,8 +70,8 @@ class AutoDaka:
 
     def daka(self, driver):
         print("打卡任务启动...")
-
         print("正在获得虚拟地理位置信息...")
+        
         # 获取虚拟地理位置信息
         driver.execute_cdp_cmd(
             "Browser.grantPermissions",  # 授权地理位置信息
@@ -95,9 +95,9 @@ class AutoDaka:
         print("基本信息填写中...")
 
         # 是否在校
-        school = WebDriverWait(driver, 10).until(
+        inSchool = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")))
-        school.click()
+        inSchool.click()
 
         time.sleep(1)
 
@@ -143,7 +143,8 @@ class AutoDaka:
         print("正在识别验证码")
         # 输入chaojiying的用户名，密码和软件ID
         chaojiying = Chaojiying_Client('kalival', 'mlz123123', '928325')
-        dic = chaojiying.PostPic(img, 1902)
+        # 设定验证码类型为4位全英文
+        dic = chaojiying.PostPic(img, 3004)
         verify_code = dic['pic_str']
 
         print(f"验证码识别完成 验证码为{verify_code}")
@@ -177,7 +178,7 @@ class AutoDaka:
     
     def Reminder(self, content):
         if self.DD_BOT_TOKEN:
-            ding= dingpush('浙江大学每日健康打卡', content, self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
+            ding= dingpush('浙江大学每日健康打卡小助手', content, self.DD_BOT_TOKEN,self.DD_BOT_SECRET)
             ding.SelectAndPush()
         else:
             print("钉钉推送未配置，请自行查看签到结果")
@@ -191,7 +192,6 @@ class AutoDaka:
         driver.close()
         print("打卡完成")
         
-
 
 if __name__ == "__main__":
 
