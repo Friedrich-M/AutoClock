@@ -12,6 +12,8 @@
 利用github action 实现自动健康打卡，
 针对验证码版本开发，适用于最新版的打卡系统
 
+<img width="300" src="https://user-images.githubusercontent.com/85838942/167908824-4f1b1495-6032-493c-9765-0838ac74699b.jpeg">
+
 
 ## 写在前面
 钉钉机器人推送代码来自[Dimlitter](https://github.com/Dimlitter)同学
