@@ -165,7 +165,7 @@ class AutoDaka:
         # 弹出的确认提交窗口，点击确定
         try:  
             tijiao = WebDriverWait(driver, 10).until(
-                            EC.element_to_be_clickable((By.XPATH, '//*[@id="wapcf"]/div/div[2]/div[1]')))
+                            EC.element_to_be_clickable((By.XPATH, '//*[@id="wapcf"]/div/div[2]/div[2]')))
             tijiao.click()
             print("确认提交")
             self.Reminder("今天的打卡完成了🚌，耶！")
