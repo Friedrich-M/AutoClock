@@ -112,28 +112,6 @@ class AutoDaka:
             print('get location wrong...\n', error)
 
         time.sleep(1)
-        
-        # 下面的内容缓存里已经填写过了，不用再填写
-
-        # 所在校区
-        # driver.find_element(by=By.XPATH,
-        #         value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]/i").click()
-
-        # # 今日申领健康码的状态？
-        # driver.find_element(by=By.XPATH,
-        #         value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[21]/div/div/div[1]/span[1]").click()
-
-        # # 今日是否有发热症状（高于37.2 ℃）？
-        # driver.find_element(by=By.XPATH,
-        #         value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[22]/div/div/div[2]/span[1]").click()
-
-        # # 今日是否有涉及涉疫情的管控措施
-        # driver.find_element(by=By.XPATH,
-        #         value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[22]/div/div/div[2]/span[1]").click()
-
-        # # 是否有与新冠疫情确诊人员或密接人员有接触的情况?
-        # driver.find_element(by=By.XPATH,
-        #         value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[25]/div/div/div[2]/span[1]").click()
 
         # 获取验证码
 #         print("正在获取验证码...")
@@ -155,19 +133,19 @@ class AutoDaka:
 
         # 本人承诺
         driver.find_element(by=By.XPATH,
-                            value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[27]/div/div/div/span[1]").click()
+                            value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/div/div/span[1]").click()
 
         # 提交信息
-        driver.find_element(by=By.XPATH,
+        driver.find_element(by=By.XPATH, 
                             value="/html/body/div[1]/div[1]/div/section/div[5]/div/a").click()
 
         time.sleep(2)
         
         # 弹出的确认提交窗口，点击确定
         try:  
-            tijiao = WebDriverWait(driver, 10).until(
+            submit = WebDriverWait(driver, 10).until(
                             EC.element_to_be_clickable((By.XPATH, '//*[@id="wapcf"]/div/div[2]/div[2]')))
-            tijiao.click()
+            submit.click()
             print("确认提交")
             self.Reminder("今天的打卡完成了🚌，耶！")
         except Exception as error:
