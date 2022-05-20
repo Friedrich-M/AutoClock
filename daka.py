@@ -135,7 +135,7 @@ class AutoDaka:
         try:
             commit = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable((By.XPATH, 
-                                    '/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/div/div/span[1]'))) 
+                                    '/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/div/div/span[1]/i'))) 
             commit.click()
         except Exception as error:
             print('commit wrong...\n', error)
