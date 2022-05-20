@@ -111,7 +111,7 @@ class AutoDaka:
         except Exception as error:
             print('get location wrong...\n', error)
 
-        time.sleep(1)
+        time.sleep(3)
 
         # 获取验证码
 #         print("正在获取验证码...")
