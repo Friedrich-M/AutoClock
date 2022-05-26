@@ -2,7 +2,8 @@
 <div style="text-align: center">
 
   ![AUR](https://img.shields.io/badge/license-MIT%20License%202.0-green.svg)
-
+  ![GitHub stars](https://img.shields.io/github/stars/Friedrich-M/AutoDaka.svg?style=social&label=Stars)
+  ![GitHub forks](https://img.shields.io/github/forks/Friedrich-M/AutoDaksvg?style=social&label=Fork)
 </div>
 
 <img width="400" alt="image" src="https://user-images.githubusercontent.com/85838942/167731771-1e92944d-a33c-4c21-84b3-7621547adeef.png">
@@ -50,7 +51,7 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
    on:
    workflow_dispatch:
    schedule:
-      - cron: '0 */12 * * *'
+      - cron: '45 */12 * * *'
    ```
  - 注意，github是UTC时间，北京时间是UTC时间加8小时
  
