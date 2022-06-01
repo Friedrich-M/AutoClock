@@ -71,7 +71,7 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
 
 ## 验证码识别
 
-验证码识别平台为https://www.chaojiying.com/
+<!-- 验证码识别平台为https://www.chaojiying.com/
 
 请自行前往注册一个账号，再生成一个软件ID
 
@@ -79,7 +79,7 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
 
 复制“账号”、“密码”、“软件ID” 替换daka.py中的红圈内参数
 
-<img width="500" alt="image" src="https://user-images.githubusercontent.com/85838942/167732896-1eb787e0-794b-492d-acdd-60e564cf5324.png">
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/85838942/167732896-1eb787e0-794b-492d-acdd-60e564cf5324.png"> -->
 
 
 ## 注意事项
