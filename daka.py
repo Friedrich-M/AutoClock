@@ -41,6 +41,7 @@ class AutoDaka:
         driver = webdriver.Chrome(options=chrome_options) 
         # 访问url 
         driver.get(url)
+        time.sleep(2)
         # 将窗口最大化
         driver.maximize_window()
 
