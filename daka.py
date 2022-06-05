@@ -158,7 +158,7 @@ class AutoDaka:
             print("确认提交")
             self.Reminder("今天的打卡完成了🚌，耶！")
         except Exception as error:
-            print('您已经提交过一次了.\n', error)
+            print('您已经提交过一次了.\n')
             self.Reminder("完成今天的打卡任务√")
 
         time.sleep(1)
