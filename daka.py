@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from chaojiying import Chaojiying_Client
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import WebDriverException
 import datetime
 import time
 import os
@@ -40,8 +41,10 @@ class AutoDaka:
         # 创建chrome驱动
         driver = webdriver.Chrome(options=chrome_options) 
         # 访问url 
-        driver.get(url)
-        time.sleep(2)
+        try:
+            driver.get(url)
+        except WebDriverException:
+            print("page down")
         # 将窗口最大化
         driver.maximize_window()
 
