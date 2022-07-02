@@ -38,14 +38,11 @@ class AutoDaka:
         chrome_options.add_argument('--hide-scrollbars')
         chrome_options.add_argument('--headless')
 
-        # 创建chrome驱动
         driver = webdriver.Chrome(options=chrome_options) 
-        # 访问url 
         try:
             driver.get(url)
         except WebDriverException:
             print("page down")
-        # 将窗口最大化
         driver.maximize_window()
 
         return driver
@@ -71,6 +68,12 @@ class AutoDaka:
         except Exception as err:
             print(str(err))
             raise Exception
+    
+    def clickElement(self, xpath_path):
+        element = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, xpath_path)))
+        element.click()
+        
 
     def daka(self, driver):
         print("打卡任务启动...")
@@ -132,24 +135,6 @@ class AutoDaka:
             print('get location wrong...\n', error)
 
         time.sleep(3)
-
-        # 获取验证码
-#         print("正在获取验证码...")
-#         img = driver.find_element(by=By.XPATH,
-#                                   value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/span/img").screenshot_as_png
-
-#         print("正在识别验证码")
-#         # 输入chaojiying的用户名，密码和软件ID
-#         chaojiying = Chaojiying_Client('kalival', 'mlz123123', '928325')
-#         # 设定验证码类型为4位全英文
-#         dic = chaojiying.PostPic(img, 3004)
-#         verify_code = dic['pic_str']
-
-#         print(f"验证码识别完成 验证码为{verify_code}")
-
-#         # 填入验证码
-#         driver.find_element(by=By.XPATH,
-#                             value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/input").send_keys(verify_code)
 
         # 本人承诺
         try:
