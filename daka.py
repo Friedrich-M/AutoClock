@@ -69,7 +69,7 @@ class AutoDaka:
             print(str(err))
             raise Exception
     
-    def clickElement(xpath_path):
+    def clickElement(self, xpath_path):
         element = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, xpath_path)))
         element.click()
