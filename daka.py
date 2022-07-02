@@ -96,19 +96,35 @@ class AutoDaka:
 
         time.sleep(2)  # 等待位置信息
 
-        print("基本信息填写中...")
-
+        #print("基本信息填写中...")
+        print("在校信息填写中...")
         # 是否在校
-        inSchool = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")))
-        inSchool.click()
-
+        try:
+            inSchool = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")))
+            inSchool.click()
+        except Exception as error:
+            print('write inSchool Information wrong...\n', error)
         time.sleep(1)
+
+        # 是否在实习
+        print("实习信息填写中...")
+        try:
+            inPractice =  WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[7]/div/div/div[3]/span[1]")))
+            inPractice.click()
+            print("实习信息已提交")
+        except Exception as error:
+            print('write inPractice Information wrong...\n', error)
+        time.sleep(1)
+
+        # 位置填写
+        print("位置信息填写中...")
 
         try:  # 提交位置信息
             area_element = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable(
-                    (By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[9]/div/input"))
+                    (By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[10]/div/input"))
             )
             area_element.click()
             print("地理位置信息已提交")
@@ -139,7 +155,7 @@ class AutoDaka:
         try:
             commit = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, 
-                                    '/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/div/div/span[1]/i'))) 
+                                    '/html/body/div[1]/div[1]/div/section/div[4]/ul/li[27]/div/div/div/span[1]/i'))) 
             commit.click()
         except Exception as error:
             print('commit wrong...\n', error)
