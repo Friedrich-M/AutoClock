@@ -102,10 +102,14 @@ class AutoDaka:
         print("基本信息填写中...")
 
         # 是否在校
-        self.clickElement("/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")
+        inSchool = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")))
+        inSchool.click()
         
         #是否进行实习或实践
-        self.clickElement("/html/body/div[1]/div[1]/div/section/div[4]/ul/li[7]/div/div/div[3]/span[1]")
+        internship = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[7]/div/div/div[3]/span[1]")))
+        internship.click()internship
         
         time.sleep(1)
 
