@@ -119,7 +119,7 @@ class AutoDaka:
         try:  # 提交位置信息
             area_element = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable(
-                    (By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[9]/div/input"))
+                    (By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[10]/div/input"))
             )
             area_element.click()
             print("地理位置信息已提交")
