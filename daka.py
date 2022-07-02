@@ -38,14 +38,11 @@ class AutoDaka:
         chrome_options.add_argument('--hide-scrollbars')
         chrome_options.add_argument('--headless')
 
-        # 创建chrome驱动
         driver = webdriver.Chrome(options=chrome_options) 
-        # 访问url 
         try:
             driver.get(url)
         except WebDriverException:
             print("page down")
-        # 将窗口最大化
         driver.maximize_window()
 
         return driver
@@ -71,6 +68,12 @@ class AutoDaka:
         except Exception as err:
             print(str(err))
             raise Exception
+    
+    def clickElement(xpath_path):
+        element = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, xpath_path)))
+        element.click()
+        
 
     def daka(self, driver):
         print("打卡任务启动...")
@@ -99,10 +102,11 @@ class AutoDaka:
         print("基本信息填写中...")
 
         # 是否在校
-        inSchool = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")))
-        inSchool.click()
-
+        clickElement("/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")
+        
+        #是否进行实习或实践
+        clickElement("/html/body/div[1]/div[1]/div/section/div[4]/ul/li[7]/div/div/div[3]/span[1]")
+        
         time.sleep(1)
 
         try:  # 提交位置信息
@@ -117,29 +121,11 @@ class AutoDaka:
 
         time.sleep(3)
 
-        # 获取验证码
-#         print("正在获取验证码...")
-#         img = driver.find_element(by=By.XPATH,
-#                                   value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/span/img").screenshot_as_png
-
-#         print("正在识别验证码")
-#         # 输入chaojiying的用户名，密码和软件ID
-#         chaojiying = Chaojiying_Client('kalival', 'mlz123123', '928325')
-#         # 设定验证码类型为4位全英文
-#         dic = chaojiying.PostPic(img, 3004)
-#         verify_code = dic['pic_str']
-
-#         print(f"验证码识别完成 验证码为{verify_code}")
-
-#         # 填入验证码
-#         driver.find_element(by=By.XPATH,
-#                             value="/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/input").send_keys(verify_code)
-
         # 本人承诺
         try:
             commit = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, 
-                                    '/html/body/div[1]/div[1]/div/section/div[4]/ul/li[26]/div/div/div/span[1]/i'))) 
+                                    '/html/body/div[1]/div[1]/div/section/div[4]/ul/li[27]/div/div/div/span[1]/i'))) 
             commit.click()
         except Exception as error:
             print('commit wrong...\n', error)
