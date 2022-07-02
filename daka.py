@@ -102,10 +102,10 @@ class AutoDaka:
         print("基本信息填写中...")
 
         # 是否在校
-        clickElement("/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")
+        self.clickElement("/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")
         
         #是否进行实习或实践
-        clickElement("/html/body/div[1]/div[1]/div/section/div[4]/ul/li[7]/div/div/div[3]/span[1]")
+        self.clickElement("/html/body/div[1]/div[1]/div/section/div[4]/ul/li[7]/div/div/div[3]/span[1]")
         
         time.sleep(1)
 
