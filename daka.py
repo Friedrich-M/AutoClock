@@ -109,7 +109,7 @@ class AutoDaka:
         #是否进行实习或实践
         internship = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[7]/div/div/div[3]/span[1]")))
-        internship.click()internship
+        internship.click()
         
         time.sleep(1)
 
