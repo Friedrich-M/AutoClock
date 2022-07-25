@@ -1,3 +1,4 @@
+from lib2to3.pgen2 import driver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from chaojiying import Chaojiying_Client
@@ -31,7 +32,7 @@ class AutoDaka:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--disable-infobars")
 
-        # 使用headless无界面浏览器模式，因为要放在linux服务器上运行，无法显示界面，调试的时候需要把下面五行注释掉，显示chrome界面
+        #使用headless无界面浏览器模式，因为要放在linux服务器上运行，无法显示界面，调试的时候需要把下面五行注释掉，显示chrome界面
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('window-size=1920x1080')
         chrome_options.add_argument('--disable-gpu')
@@ -44,7 +45,7 @@ class AutoDaka:
         except WebDriverException:
             print("page down")
         driver.maximize_window()
-
+        
         return driver
 
     def login(self, driver):
@@ -98,53 +99,73 @@ class AutoDaka:
         )
 
         time.sleep(2)  # 等待位置信息
-
+        
         #print("基本信息填写中...")
         print("在校信息填写中...")
         # 是否在校
         try:
-            inSchool = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[4]/div/div/div[1]/span[1]")))
-            inSchool.click()
+            inSchool=driver.find_element(by=By.NAME,value="sfzx")
+            inSchoolOption=inSchool.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+            inSchoolYes=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(inSchoolOption[0]))
+            inSchoolYes.click()
+            Campus=driver.find_element(by=By.NAME,value="campus")
+            CampusOption=Campus.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+            CampusYuquan=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(CampusOption[1]))
+            CampusYuquan.click()
+            
         except Exception as error:
-            print('write inSchool Information wrong...\n', error)
+            print("在校信息填写异常\n", error)
         time.sleep(1)
 
         # 是否在实习
         print("实习信息填写中...")
         try:
-            inPractice =  WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[7]/div/div/div[3]/span[1]")))
-            inPractice.click()
+            internship=driver.find_element(by=By.NAME,value="internship")
+            internshipOption=internship.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+            internshipNo=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(internshipOption[2]))
+            internshipNo.click()
             print("实习信息已提交")
         except Exception as error:
-            print('write inPractice Information wrong...\n', error)
+            print("实习信息填写异常\n", error)
         time.sleep(1)
 
         # 位置填写
         print("位置信息填写中...")
 
         try:  # 提交位置信息
-            area_element = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable(
-                    (By.XPATH, "/html/body/div[1]/div[1]/div/section/div[4]/ul/li[10]/div/input"))
-            )
-            area_element.click()
+            GeoLocation=driver.find_element(by=By.NAME,value="area")
+            GeoLocationInput=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(GeoLocation.find_element(by=By.TAG_NAME, value="input")))
+            GeoLocationInput.click()
             print("地理位置信息已提交")
         except Exception as error:
-            print('get location wrong...\n', error)
+            print("地理位置信息填写异常\n", error)
 
         time.sleep(3)
 
+        #健康码信息
+        print("健康码信息填写中...")
+
+        try:  # 提交位置信息
+            HealthCode=driver.find_element(by=By.NAME,value="sqhzjkkys")
+            HealthCodeOption=HealthCode.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+            GreenCode=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(HealthCodeOption[0]))
+            GreenCode.click()
+            print("健康码信息填写已提交")
+        except Exception as error:
+            print("健康码信息填写异常\n", error)
+
+        time.sleep(3)
+        
         # 本人承诺
         try:
-            commit = WebDriverWait(driver, 20).until(
-                EC.element_to_be_clickable((By.XPATH, 
-                                    '/html/body/div[1]/div[1]/div/section/div[4]/ul/li[27]/div/div/div/span[1]/i'))) 
-            commit.click()
+            Commit=driver.find_element(by=By.NAME,value="sfqrxxss")
+            CommitYes=Commit.find_element(by=By.TAG_NAME, value="div").find_element(by=By.TAG_NAME, value="div")
+            CommitYes.click()
         except Exception as error:
-            print('commit wrong...\n', error)
+            print("承诺失败\n", error)
 
+        time.sleep(1)
+        
         # 提交信息
         driver.find_element(by=By.XPATH, 
                             value="/html/body/div[1]/div[1]/div/section/div[5]/div/a").click()
@@ -160,7 +181,7 @@ class AutoDaka:
             self.Reminder("今天的打卡完成了🚌，耶！")
         except Exception as error:
             print('您已经提交过一次了.\n')
-            self.Reminder("完成今天的打卡任务√")
+            self.Reminder("您可能已经提交,请注意查看")
 
         time.sleep(1)
     
@@ -180,9 +201,59 @@ class AutoDaka:
         driver.close()
         print("打卡完成")
         
+    def run2(self):
+        driver= self.init_driver()
+        self.login(driver)
+        #inSchool=driver.find_element(by=By.NAME,value="sfzx")
+        #Test=inSchool.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+        #Test[1].click()
+        driver.execute_cdp_cmd(
+            "Browser.grantPermissions",  # 授权地理位置信息
+            {
+                "origin": self.url,
+                "permissions": ["geolocation"]
+            },
+        )
+
+        driver.execute_cdp_cmd(
+            "Emulation.setGeolocationOverride",  # 虚拟位置
+            {
+                "latitude": self.latitude,
+                "longitude": self.longitude,
+                "accuracy": 50,
+            },
+        )
+
+        time.sleep(2)  # 等待位置信息
+        inSchool=driver.find_element(by=By.NAME,value="sfzx")
+        inSchoolOption=inSchool.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+        inSchoolYes=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(inSchoolOption[0]))
+        inSchoolYes.click()
+        Campus=driver.find_element(by=By.NAME,value="campus")
+        CampusOption=Campus.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+        CampusYuquan=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(CampusOption[1]))
+        CampusYuquan.click()
+        internship=driver.find_element(by=By.NAME,value="internship")
+        internshipOption=internship.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+        internshipNo=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(internshipOption[2]))
+        internshipNo.click()
+        GeoLocation=driver.find_element(by=By.NAME,value="area")
+        GeoLocationInput=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(GeoLocation.find_element(by=By.TAG_NAME, value="input")))
+        GeoLocationInput.click()
+        HealthCode=driver.find_element(by=By.NAME,value="sqhzjkkys")
+        HealthCodeOption=HealthCode.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+        GreenCode=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(HealthCodeOption[0]))
+        GreenCode.click()
+        Commit=driver.find_element(by=By.NAME,value="sfqrxxss")
+        CommitYes=Commit.find_element(by=By.TAG_NAME, value="div").find_element(by=By.TAG_NAME, value="div")
+        CommitYes.click()
+
+        
+        print("打卡完成")
+        
 
 if __name__ == "__main__":
-
+    
     """
     用户输入区：
     学号
