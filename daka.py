@@ -128,6 +128,17 @@ class AutoDaka:
 
         time.sleep(3)
 
+        try: # 提交管控信息
+            control_measure = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable(
+                    (By.XPATH,"/html/body/div[1]/div[1]/div/section/div[4]/ul/li[25]/div/div/div[2]/span[1]")
+                )
+            )
+            control_measure.click()
+            print("管控措施已提交")
+        except Exception as error:
+            print('write control_measure wrong...\n', error)
+            
         # 本人承诺
         try:
             commit = WebDriverWait(driver, 20).until(
