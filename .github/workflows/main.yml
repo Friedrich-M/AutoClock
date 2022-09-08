@@ -3,12 +3,11 @@ name: AutoDaka
 # Controls when the action will run. 
 on:
   workflow_dispatch:
-  push:
-  pull_request:
   watch:
     types: [ started ]
   schedule:
-    - cron: 0 */12 * * * # Runs every 45th minute past the 0, 10 and 20th hour. Actions schedules run at most every 5 minutes.
+    - cron: 0 22 * * * # Runs every 45th minute past the 0, 10 and 20th hour. Actions schedules run at most every 5 minutes.
+    - cron: 0 10 * * *
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
