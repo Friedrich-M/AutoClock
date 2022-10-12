@@ -33,11 +33,11 @@ class AutoDaka:
         chrome_options.add_argument("--disable-infobars")
 
         #使用headless无界面浏览器模式，因为要放在linux服务器上运行，无法显示界面，调试的时候需要把下面五行注释掉，显示chrome界面
-        # chrome_options.add_argument('--no-sandbox')
-        # chrome_options.add_argument('window-size=1920x1080')
-        # chrome_options.add_argument('--disable-gpu')
-        # chrome_options.add_argument('--hide-scrollbars')
-        # chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('window-size=1920x1080')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--hide-scrollbars')
+        chrome_options.add_argument('--headless')
 
         driver = webdriver.Chrome(options=chrome_options) 
         try:
