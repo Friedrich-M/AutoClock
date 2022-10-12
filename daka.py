@@ -1,4 +1,5 @@
 from lib2to3.pgen2 import driver
+from opcode import HAVE_ARGUMENT
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from chaojiying import Chaojiying_Client
@@ -196,9 +197,15 @@ class AutoDaka:
             submit.click()
             print("确认提交")
             self.Reminder("今天的打卡完成了🚌，耶！")
-        except Exception as error:
-            print('提交失败.\n')
-            self.Reminder("提交失败,请注意")
+        except:
+            try:
+                # 寻找<div class="wapat-title">每天只能填报一次，你已提交过</div>的按钮
+                HaveSubmitted=driver.find_element(by=By.CLASS_NAME, value="wapat-title")
+                print('您今天已提交过.\n')
+                self.Reminder("您今天已提交过")
+            except Exception as error:
+                print('提交失败.\n')
+                self.Reminder("提交失败,请注意")
 
         time.sleep(1)
     
