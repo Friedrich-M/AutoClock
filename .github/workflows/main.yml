@@ -3,8 +3,6 @@ name: AutoDaka
 # Controls when the action will run. 
 on:
   workflow_dispatch:
-  push:
-  pull_request:
   watch:
     types: [ started ]
   schedule:
