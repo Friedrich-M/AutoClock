@@ -6,8 +6,7 @@ on:
   watch:
     types: [ started ]
   schedule:
-    - cron: 0 22 * * * # Runs every 45th minute past the 0, 10 and 20th hour. Actions schedules run at most every 5 minutes.
-    - cron: 0 10 * * *
+    - cron: 45 */10 * * * # Runs every 45th minute past the 0, 10 and 20th hour. Actions schedules run at most every 5 minutes.
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,6 +20,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Sync with upstream
+        if: github.repository != 'Friedrich-M/AutoClock'
+        continue-on-error: true
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.2
+        with:
+          upstream_sync_repo: Friedrich-M/AutoClock
+          upstream_sync_branch: main
+          target_sync_branch: main
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+          upstream_pull_args: '-s recursive -Xtheirs'
 
       # Runs a single command using the runners shell
       - name: 'Set up Python'

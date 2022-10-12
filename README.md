@@ -29,9 +29,9 @@
 - （必须）Settings > Secrets > Actions > New repository secret， 添加 `account`，内容为浙大通行证账号（学号），添加`password`，内容为浙大通行证密码。
    
 ```
-account:通行证账号
+ACCOUNT:通行证账号
  
-password:通行证密码
+PASSWORD:通行证密码
 ```
 
 - （可选）Settings > Secrets > Actions > New repository secret， 添加 `DD_BOT_TOKEN`，内容为钉钉自定义机器人的token，添加`DD_BOT_SECRET`，内容为机器人的签名。
