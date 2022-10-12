@@ -33,11 +33,11 @@ class AutoDaka:
         chrome_options.add_argument("--disable-infobars")
 
         #使用headless无界面浏览器模式，因为要放在linux服务器上运行，无法显示界面，调试的时候需要把下面五行注释掉，显示chrome界面
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('window-size=1920x1080')
-        chrome_options.add_argument('--disable-gpu')
-        chrome_options.add_argument('--hide-scrollbars')
-        chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--no-sandbox')
+        # chrome_options.add_argument('window-size=1920x1080')
+        # chrome_options.add_argument('--disable-gpu')
+        # chrome_options.add_argument('--hide-scrollbars')
+        # chrome_options.add_argument('--headless')
 
         driver = webdriver.Chrome(options=chrome_options) 
         try:
@@ -145,7 +145,7 @@ class AutoDaka:
         #健康码信息
         print("健康码信息填写中...")
 
-        try:  # 提交位置信息
+        try:  # 提交健康码信息
             HealthCode=driver.find_element(by=By.NAME,value="sqhzjkkys")
             HealthCodeOption=HealthCode.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
             GreenCode=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(HealthCodeOption[0]))
@@ -153,6 +153,21 @@ class AutoDaka:
             print("健康码信息填写已提交")
         except Exception as error:
             print("健康码信息填写异常\n", error)
+
+
+
+        #同住人员信息
+        print("同住人员信息填写中...")
+
+        try:  # 提交同住人员信息
+            RoomMate=driver.find_element(by=By.NAME,value="sfymqjczrj")
+            RoomMateOption=RoomMate.find_element(by=By.TAG_NAME, value="div").find_elements(by=By.TAG_NAME, value="div")
+            # 在RoomMateOption中寻找元素<span>否 No</span>
+            RoomMateNo=WebDriverWait(driver, 10).until(EC.element_to_be_clickable(RoomMateOption[1]))
+            RoomMateNo.click()
+            print("同住人员信息填写已提交")
+        except Exception as error:
+            print("同住人员信息填写异常\n", error)
 
         time.sleep(3)
         
@@ -173,15 +188,17 @@ class AutoDaka:
         time.sleep(2)
         
         # 弹出的确认提交窗口，点击确定
-        try:  
+        try:
+            # 寻找<div class="wapcf-btn wapcf-btn-ok">确认提交</div>的按钮
+            submit=driver.find_element(by=By.CLASS_NAME, value="wapcf-btn-ok")
             submit = WebDriverWait(driver, 10).until(
-                            EC.element_to_be_clickable((By.XPATH, '//*[@id="wapcf"]/div/div[2]/div[2]')))
+                            EC.element_to_be_clickable(submit))
             submit.click()
             print("确认提交")
             self.Reminder("今天的打卡完成了🚌，耶！")
         except Exception as error:
-            print('您已经提交过一次了.\n')
-            self.Reminder("您可能已经提交,请注意查看")
+            print('提交失败.\n')
+            self.Reminder("提交失败,请注意")
 
         time.sleep(1)
     
