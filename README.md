@@ -1,4 +1,4 @@
-# ZJU-AutoDaka
+# ZJU-AutoClock
 <div style="text-align: center">
 
   ![AUR](https://img.shields.io/badge/license-MIT%20License%202.0-green.svg)
@@ -10,8 +10,7 @@
 
 
 # 简介
-利用github action 实现自动健康打卡，
-针对验证码版本开发，适用于最新版的打卡系统
+利用github action 实现自动健康打卡，并利用钉钉token进行信息推送，已更新至最新版同住人员信息填写
 
 <img width="300" src="https://user-images.githubusercontent.com/85838942/167908824-4f1b1495-6032-493c-9765-0838ac74699b.jpeg">
 
@@ -54,6 +53,26 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
       - cron: '45 */12 * * *'
    ```
  - 注意，github是UTC时间，北京时间是UTC时间加8小时
+
+4. 参数设置（可选）
+    - 本机调试请设置headless参数，关闭selenium的无头模式
+    
+    ```
+    --headless False
+   ```
+    -  如需开启Chrome代理请设置proxy参数开启代理，并修改proxy-server参数添加代理ip地址
+    ```
+    --proxy True
+    --proxy-server ip:port
+   ```
+    - 如需修改经纬度信息以调整打卡地点，请设置latitude和longitude参数
+    ```
+    --latitude 虚拟地理位置纬度
+    --longitude 虚拟地理位置经度
+   ```
+    
+    
+    
  
 4. 配置钉钉消息通知（可选）
 
@@ -69,7 +88,7 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
 
 </details>
 
-## 验证码识别
+<!-- ## 验证码识别
 
 <!-- 验证码识别平台为https://www.chaojiying.com/
 
@@ -84,7 +103,7 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
 
 ## 注意事项
 
-注意：**请仓库检查开启了github action功能**，如果没有，请在当前项目的Settings>Actions>General下"allow all actions and reusable workflows"和点击Actions > schedule下启用workflows。（没有开启的页面有文字提示开启）
+注意：**请仓库检查开启了github action功能**，如果没有，请在当前项目的Settings > Actions > General下"allow all actions and reusable workflows"和点击Actions > schedule下启用workflows。（没有开启的页面有文字提示开启）
 
 当action运行时，可以在项目的**Actions**选项下看到AutoDaka这个工作流的运行记录
 
@@ -93,4 +112,6 @@ DD_BOT_SECRET ：钉钉机器人的加签密钥
 ## 声明
 
 本项目为Python学习交流的开源非营利项目，仅作为学习交流之用。
+
+不当使用产生的后果该项目不负责。
 
