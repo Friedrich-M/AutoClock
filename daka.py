@@ -30,7 +30,7 @@ class AutoDaka:
             chrome_options.add_argument('--disable-gpu')
             chrome_options.add_argument('--hide-scrollbars')
         if args.proxy:
-            chrome_options.add_argument(f'--proxy-server={args.proxy}')  
+            chrome_options.add_argument(f'--proxy-server={args.proxy-server}')  
 
         driver = webdriver.Chrome(options=chrome_options)
         try:
@@ -133,7 +133,7 @@ class AutoDaka:
                 self.Reminder("您今天已提交过")
             except Exception as error:
                 print('提交失败...')
-                self.Reminder("提交失败,请手动填写或检查代码仓库更新情况")
+                # self.Reminder("提交失败,请手动填写或检查代码仓库更新情况")
 
         time.sleep(1)
     
